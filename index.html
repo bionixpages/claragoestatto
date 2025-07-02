@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clara Goes</title>
+
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        min-height: 100vh;
+      }
+
+      :root {
+        --text-color: black;
+        --bg-url: url(./assets/bg-mobile-light.jpg);
+        --stroke-color: rgba(0, 0, 0, 0.5);
+        --surface-color: rgba(0, 0, 0, 0.05);
+        --surface-color-houver: rgba(0, 0, 0, 0.02);
+        --higlight-color: rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        background-image: var(--bg-url);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        background-attachment: fixed;
+        font-family: 'Inter', sans-serif;
+        color: var(--text-color);
+      }
+
+      body * {
+        color: var(--text-color);
+      }
+
+      #container {
+        width: 100%;
+        max-width: 588px;
+        margin: 56px auto 0px;
+        padding: 0 24px;
+      }
+
+      #profile {
+        text-align: center;
+        padding: 24px;
+      }
+
+      #profile img {
+        width: 112px;
+      }
+
+      #profile h1 {
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 20px;
+        margin-top: 8px;
+        line-height: 24px;
+      }
+
+      h2 {
+        text-align: center;
+        font-size: 18px;
+        font-weight: 500;
+        margin-top: 32px;
+        margin-bottom: 12px;
+      }
+
+      ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 24px 0;
+      }
+
+      ul li a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px 24px;
+        background: var(--surface-color);
+        border: 1px solid var(--stroke-color);
+        border-radius: 8px;
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        text-decoration: none;
+        font-weight: 500;
+        transition: background 0.2s, border 0.2s;
+        position: relative;
+        overflow: hidden;
+      }
+
+      ul li a:hover {
+        background: var(--surface-color-houver);
+        border: 1.5px solid black;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+      }
+
+      ul li a:active {
+        transform: scale(0.96);
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+        color: white !important;
+      }
+
+      ul li a::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          120deg,
+          rgba(255, 255, 255, 0.2) 0%,
+          rgba(255, 255, 255, 0.1) 50%,
+          transparent 100%
+        );
+        transition: left 0.4s ease;
+      }
+
+      ul li a:hover::before {
+        left: 100%;
+      }
+
+      #social-links {
+        display: flex;
+        justify-content: center;
+        padding: 24px 0;
+        font-size: 24px;
+      }
+
+      #social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        transition: background 0.2s;
+        border-radius: 50%;
+      }
+
+      #social-links a:hover {
+        background: var(--higlight-color);
+      }
+
+      footer {
+        margin-top: 24px;
+        text-align: center;
+        font-size: 14px;
+        color: var(--text-color);
+      }
+
+      footer a {
+        color: var(--text-color);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      footer a:hover {
+        color: #000;
+      }
+
+      ul li {
+        opacity: 0;
+        transform: translateY(10px);
+        animation: fadeInUp 0.6s ease forwards;
+      }
+
+      ul li:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      ul li:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      ul li:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      ul li:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* SEÇÕES COM IMAGENS + BOTÃO */
+      .destaque {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        margin: 32px 0;
+        padding: 0 16px;
+        animation: fadeInUp 0.8s ease both;
+      }
+
+      .destaque-img {
+        width: 80%;
+        max-width: 320px;
+        border-radius: 12px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        object-fit: cover;
+      }
+
+      .btn-orcamento {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px 24px;
+        background: var(--surface-color);
+        border: 1px solid var(--stroke-color);
+        border-radius: 8px;
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        text-decoration: none;
+        font-weight: 500;
+        transition: background 0.2s, border 0.2s;
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        max-width: 320px;
+      }
+
+      .btn-orcamento:hover {
+        background: var(--surface-color-houver);
+        border: 1.5px solid black;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .btn-orcamento:active {
+        transform: scale(0.96);
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+        color: white !important;
+      }
+
+      .btn-orcamento::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          120deg,
+          rgba(255, 255, 255, 0.2) 0%,
+          rgba(255, 255, 255, 0.1) 50%,
+          transparent 100%
+        );
+        transition: left 0.4s ease;
+      }
+
+      .btn-orcamento:hover::before {
+        left: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main id="container">
+      <!-- Perfil -->
+      <section id="profile">
+        <img
+          id="avatar"
+          src="./assets/avatar-light.png"
+          alt="Foto de perfil de Clara Goes"
+        />
+        <h1>Clara Goes Tattoo e Piercing</h1>
+      </section>
+
+      <!-- Links principais -->
+      <ul>
+        <li>
+          <a
+            href="https://w.app/7bzerh"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Faça um orçamento no WhatsApp
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.instagram.com/claragoestattoo/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Me siga no Instagram
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.google.com/maps?q=R.+Chile,+680+-+Centro,+Uberlândia+-+MG,+38405-146"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            📍 Como chegar ao Estúdio
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.instagram.com/claraglh/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            📸 Meu Instagram Pessoal
+          </a>
+        </li>
+      </ul>
+
+      <!-- Tattoo -->
+      <h2>Tatuagens Autênticas</h2>
+      <section class="destaque">
+        <img
+          src="./assets/tatto-minimalista.jpeg"
+          alt="Tattoo minimalista"
+          class="destaque-img"
+        />
+        <a
+          href="https://w.app/7bzerh"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-orcamento"
+        >
+          Solicite seu orçamento para uma tattoo minimalista
+        </a>
+      </section>
+
+      <!-- Piercing -->
+      <h2>Estilo & Perfuração</h2>
+      <section class="destaque">
+        <img
+          src="./assets/piercing-exemplo.jpeg"
+          alt="Piercing"
+          class="destaque-img"
+        />
+        <a
+          href="https://w.app/7bzerh"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-orcamento"
+        >
+          Faça um orçamento de Piercing
+        </a>
+      </section>
+
+      <!-- Redes Sociais -->
+      <nav id="social-links" aria-label="Redes sociais">
+        <a
+          href="https://www.instagram.com/claragoestattoo/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+        >
+          <ion-icon name="logo-instagram"></ion-icon>
+        </a>
+        <a
+          href="https://w.app/7bzerh"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp"
+        >
+          <ion-icon name="logo-whatsapp"></ion-icon>
+        </a>
+        <a
+          href="https://www.google.com/maps?q=R.+Chile,+680+-+Centro,+Uberlândia+-+MG,+38405-146"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Localização"
+        >
+          <ion-icon name="location-outline"></ion-icon>
+        </a>
+      </nav>
+
+      <!-- Rodapé -->
+      <footer>
+        Feito com ♥ por
+        <a href="https://www.instagram.com/bionixpages/">Bionixpages</a>
+      </footer>
+    </main>
+
+    <!-- Ionicons -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>
